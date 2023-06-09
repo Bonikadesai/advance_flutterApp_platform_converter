@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:platform_converter/providers/platform_provider.dart';
 import 'package:platform_converter/providers/theme_provider.dart';
-import 'package:platform_converter/screens/chats_material_screen.dart';
 import 'package:platform_converter/screens/material_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -48,20 +47,13 @@ void main() async {
                         : ThemeMode.light,
                 debugShowCheckedModeBanner: false,
                 home: Detail(),
-                routes: {
-                  'chat_material': (context) => ChatMaterialScreen(),
-                  // 'person_detail': (context) => PersonDetail(),
-                },
               )
             : CupertinoApp(
                 debugShowCheckedModeBanner: false,
-
                 theme: (Provider.of<ThemeProvider>(context).themeModel.isDark)
                     ? cupertinoDark
                     : cupertinoLight,
-                //theme: CupertinoThemeData(brightness: Brightness.light),
                 home: CupertinoScreen(),
-                routes: {},
               ),
       ),
     ),

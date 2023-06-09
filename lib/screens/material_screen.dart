@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:platform_converter/modals/person.dart';
 import 'package:platform_converter/providers/platform_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../providers/theme_provider.dart';
 import '../utils/globals.dart';
@@ -17,6 +18,7 @@ class Detail extends StatefulWidget {
 }
 
 class _DetailState extends State<Detail> {
+  int initialIndex = 0;
   final GlobalKey<FormState> addInFormKey = GlobalKey<FormState>();
   final ImagePicker picker = ImagePicker();
   File? xfile;
@@ -58,8 +60,9 @@ class _DetailState extends State<Detail> {
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
-        //type: BottomNavigationBarType.shifting,
-        currentIndex: Provider.of<PlatFormProvider>(context).select,
+      
+        currentIndex: initialIndex,
+        //currentIndex: Provider.of<PlatFormProvider>(context).select,
         onTap: (val) {
           Provider.of<PlatFormProvider>(context, listen: false)
               .selectColor(val);
@@ -100,6 +103,11 @@ class _DetailState extends State<Detail> {
         key: addInFormKey,
         child: PageView(
           controller: pageController,
+          onPageChanged: (val) {
+            setState(() {
+              initialIndex = val;
+            });
+          },
           children: [
             //profile
             SingleChildScrollView(
@@ -425,12 +433,14 @@ class _DetailState extends State<Detail> {
                               ),
                             ),
                             trailing: IconButton(
-                              icon: Icon(
-                                Icons.phone,
-                                color: Colors.green,
-                              ),
-                              onPressed: () {},
-                            ),
+                                icon: Icon(
+                                  Icons.phone,
+                                  color: Colors.green,
+                                ),
+                                onPressed: () async {
+                                  await launchUrl(Uri.parse(
+                                      "tel:+91${Globals.allContact[index].phone}"));
+                                }),
                           );
                         })
                     : Center(

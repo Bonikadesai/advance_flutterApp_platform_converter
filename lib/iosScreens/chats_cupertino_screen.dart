@@ -136,50 +136,33 @@ class _ChatsCupertinoScreenState extends State<ChatsCupertinoScreen> {
                               style: TextStyle(color: Colors.grey),
                             ),
                             trailing: Text(
-                                "${Globals.allContact[index].pickDate.day}/${Globals.allContact[index].pickDate.month}/${Globals.allContact[index].pickDate.year}"),
+                              "${Globals.allContact[index].pickDate.day}/${Globals.allContact[index].pickDate.month}/${Globals.allContact[index].pickDate.year}",
+                              style: TextStyle(
+                                color: (Provider.of<ThemeProvider>(context)
+                                        .themeModel
+                                        .isDark)
+                                    ? Colors.white
+                                    : Colors.black,
+                              ),
+                            ),
                           ),
                         ],
                       );
                     },
                   )
                 : Center(
-                    child: Text("No any chat yet..."),
+                    child: Text(
+                      "No any chat yet...",
+                      style: TextStyle(
+                        color: (Provider.of<ThemeProvider>(context)
+                                .themeModel
+                                .isDark)
+                            ? Colors.white
+                            : Colors.black,
+                      ),
+                    ),
                   ),
           ),
-          // child: Column(
-          //   children: [
-          //     SizedBox(
-          //       height: 70,
-          //     ),
-          //     Row(
-          //       mainAxisAlignment: MainAxisAlignment.spaceAround,
-          //       children: [
-          //         CupertinoButton(
-          //             child: Icon(CupertinoIcons.person_add), onPressed: () {}),
-          //         GestureDetector(
-          //           child: Text(
-          //             "CHATS",
-          //           ),
-          //         ),
-          //         Text(
-          //           "CALLS",
-          //         ),
-          //         Text(
-          //           "SETTINGS",
-          //         ),
-          //       ],
-          //     ),
-          //     Divider(
-          //       thickness: 2,
-          //     ),
-          //     SizedBox(
-          //       height: 300,
-          //     ),
-          //     Text(
-          //       "No any chats yet..",
-          //     ),
-          //   ],
-          // ),
         ),
       ),
     );
